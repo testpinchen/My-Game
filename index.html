@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>我的第一個遊戲</title>
+</head>
+<body style="text-align:center; font-family:sans-serif;">
+
+  <h1>🎯 點擊遊戲</h1>
+  <p>分數：<span id="score">0</span></p>
+
+  <button onclick="addScore()" style="font-size:30px; padding:20px;">
+    點我！
+  </button>
+
+  <script>
+    let score = 0;
+
+    function addScore() {
+      score = score + 1;
+      document.getElementById("score").innerText = score;
+    }
+  </script>
+
+</body>
+</html>
