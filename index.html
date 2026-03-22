@@ -7,19 +7,34 @@
 
   <h1>🎯 點擊遊戲</h1>
   <p>分數：<span id="score">0</span></p>
+  <p>時間：<span id="time">10</span></p>
 
   <button onclick="addScore()" style="font-size:30px; padding:20px;">
     點我！
   </button>
 
-  <script>
-    let score = 0;
+<script>
+  let score = 0;
+  let time = 10;
 
-    function addScore() {
+  function addScore() {
+    if (time > 0) {
       score = score + 1;
       document.getElementById("score").innerText = score;
     }
-  </script>
+  }
+
+  function countdown() {
+    if (time > 0) {
+      time = time - 1;
+      document.getElementById("time").innerText = time;
+    } else {
+      alert("時間到！你的分數是：" + score);
+    }
+  }
+
+  setInterval(countdown, 1000);
+</script>
 
 </body>
 </html>
