@@ -9,31 +9,64 @@
   <p>分數：<span id="score">0</span></p>
   <p>時間：<span id="time">10</span></p>
 
-  <button onclick="addScore()" style="font-size:30px; padding:20px;">
+  <button onclick="startGame()" id="startBtn">開始遊戲</button>
+  <button onclick="startGame()" id="restartBtn" style="display:none;">
+    再玩一次
+  </button>
+  <button onclick="addScore()" id="clickBtn" disabled style="font-size:30px; padding:20px;">
     點我！
   </button>
 
 <script>
   let score = 0;
   let time = 10;
+  let timer = null;
+  let isPlaying = false;
+
+  function startGame() {
+    score = 0;
+    time = 10;
+    isPlaying = true;
+
+    document.getElementById("score").innerText = score;
+    document.getElementById("time").innerText = time;
+
+    document.getElementById("clickBtn").disabled = false;
+    document.getElementById("startBtn").style.display = "none";
+    document.getElementById("restartBtn").style.display = "none";
+
+    if (timer) {
+      clearInterval(timer);
+    }
+
+    timer = setInterval(countdown, 1000);
+  }
 
   function addScore() {
-    if (time > 0) {
-      score = score + 1;
+    if (isPlaying) {
+      score++;
       document.getElementById("score").innerText = score;
     }
   }
 
   function countdown() {
-    if (time > 0) {
-      time = time - 1;
-      document.getElementById("time").innerText = time;
-    } else {
-      alert("時間到！你的分數是：" + score);
+    time--;
+    document.getElementById("time").innerText = time;
+
+    if (time <= 0) {
+      endGame();
     }
   }
 
-  setInterval(countdown, 1000);
+  function endGame() {
+    clearInterval(timer);
+    isPlaying = false;
+
+    document.getElementById("clickBtn").disabled = true;
+    document.getElementById("restartBtn").style.display = "inline";
+
+    alert("時間到！你的分數是：" + score);
+  }
 </script>
 
 </body>
